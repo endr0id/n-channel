@@ -15,6 +15,6 @@ jobs:
         with:
           node-version: 22
       - run: npm ci
-        working-directory: apps/frontend
+        working-directory: frontend
       - run: npm test
-        working-directory: apps/frontend
+        working-directory: frontend

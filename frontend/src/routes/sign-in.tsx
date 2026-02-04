@@ -1,9 +1,14 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from "@tanstack/react-router";
+import SignInLayout from "../components/layouts/sign-in";
 
-export const Route = createFileRoute('/sign-in')({
-  component: RouteComponent,
-})
+export const Route = createFileRoute("/sign-in")({
+	component: RouteComponent,
+});
 
 function RouteComponent() {
-  return <div>Hello "/sign-in"!</div>
+	return (
+		<div className="flex items-center justify-center min-h-screen">
+			<SignInLayout />
+		</div>
+	);
 }

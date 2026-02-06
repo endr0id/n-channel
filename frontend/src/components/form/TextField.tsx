@@ -1,4 +1,4 @@
-import type { ValidationError } from "@tanstack/react-form";
+import { Input } from "@headlessui/react";
 import clsx from "clsx";
 import type React from "react";
 
@@ -24,7 +24,7 @@ const TextField = ({
 	...props
 }: TextFieldProps) => {
 	return (
-		<input
+		<Input
 			type={type}
 			className={clsx(
 				`border ${error ? "border-mocha-red" : "border-mocha-overlay2"} rounded-md focus:border-mocha-text`,

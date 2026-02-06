@@ -1,5 +1,6 @@
 import * as z from "zod";
 import { useAppForm } from "../../form/hooks/useAppForm";
+import { HelperText } from "../../form/TextField";
 
 interface SignInFormData {
 	email: string;
@@ -8,15 +9,15 @@ interface SignInFormData {
 
 const defaultValues: SignInFormData = { email: "", password: "" };
 const signInScheme = z.object({
-	email: z.email(),
-	password: z.string(),
+	email: z.email("正しいメールアドレス形式で入力してください"),
+	password: z.string().min(12, "パスワードは12文字以上で入力してください"),
 });
 
 const SignIn = () => {
 	const form = useAppForm({
 		defaultValues: defaultValues,
 		validators: {
-			onBlur: signInScheme,
+			onSubmit: signInScheme,
 		},
 		onSubmit: ({ value }) => {
 			console.log("value: ", value);
@@ -34,19 +35,31 @@ const SignIn = () => {
 				<form.AppField
 					name="email"
 					children={(field) => (
-						<field.TextField
-							placeholder="example@example.com"
-							onBlur={(e) => field.handleChange(e.target.value)}
-						/>
+						<div className="grid gap-1">
+							<field.TextField
+								error={field.state.meta.errors.length > 0}
+								placeholder="example@example.com"
+								onBlur={(e) => field.handleChange(e.target.value)}
+							/>
+							{field.state.meta.errors && (
+								<HelperText message={field.state.meta.errors[0]?.message} />
+							)}
+						</div>
 					)}
 				/>
 				<form.AppField
 					name="password"
 					children={(field) => (
-						<field.TextField
-							type="password"
-							onBlur={(e) => field.handleChange(e.target.value)}
-						/>
+						<div className="grid gap-1">
+							<field.TextField
+								error={field.state.meta.errors.length > 0}
+								type="password"
+								onBlur={(e) => field.handleChange(e.target.value)}
+							/>
+							{field.state.meta.errors && (
+								<HelperText message={field.state.meta.errors[0]?.message} />
+							)}
+						</div>
 					)}
 				/>
 				<form.AppForm>

@@ -1,6 +1,6 @@
 import * as z from "zod";
-import { useAppForm } from "../../form/hooks/useAppForm";
-import { HelperText } from "../../form/TextField";
+import { useAppForm } from "../../components/form/hooks/useAppForm";
+import { HelperText } from "../../components/form/TextField";
 
 interface SignInFormData {
 	email: string;

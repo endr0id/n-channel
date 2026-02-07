@@ -1,6 +1,7 @@
 import * as z from "zod";
 import { useAppForm } from "../../components/form/hooks/useAppForm";
 import { HelperText } from "../../components/form/TextField";
+import { login } from "./api/login";
 
 interface SignInFormData {
 	email: string;
@@ -20,7 +21,8 @@ const SignIn = () => {
 			onSubmit: signInScheme,
 		},
 		onSubmit: ({ value }) => {
-			console.log("value: ", value);
+			const res = login(value);
+			console.log("value: ", res);
 		},
 	});
 	return (

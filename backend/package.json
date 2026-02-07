@@ -12,9 +12,9 @@
     "fastify": "^5.7.4"
   },
   "devDependencies": {
+    "@n-channel/api-types": "*",
     "@types/node": "^25.2.0",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3",
-    "@n-channel/api-types": "workspace:*"
+    "typescript": "^5.9.3"
   }
 }

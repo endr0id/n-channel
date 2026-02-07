@@ -23,11 +23,11 @@ paths:
 components:
   schemas:
     LoginRequest:
-      $ref: "./components/requestBodies/LoginRequest.yml"
+      $ref: "./schemas/requestBodies/LoginRequest.yml"
     User:
-      $ref: "./components/schemas/user/UserResponse.yml"
+      $ref: "./schemas/user/UserResponse.yml"
     ErrorResponse:
-      $ref: "./components/schemas/errors/Unauthorized.yml"
+      $ref: "./schemas/errors/Unauthorized.yml"
 
   requestBodies:
     LoginRequest:

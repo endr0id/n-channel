@@ -1,9 +1,4 @@
 {
   "name": "n-channel",
-  "private": true,
-  "workspaces": [
-    "frontend",
-    "backend",
-    "packages/*"
-  ]
+  "private": true
 }

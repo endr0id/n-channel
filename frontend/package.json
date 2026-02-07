@@ -24,7 +24,7 @@
 		"zod": "^4.3.6"
 	},
 	"devDependencies": {
-		"@n-channel/api-types": "*",
+		"@n-channel/api-types": "workspace:*",
 		"@biomejs/biome": "2.3.13",
 		"@eslint/js": "^9.39.1",
 		"@storybook/addon-a11y": "^10.2.3",

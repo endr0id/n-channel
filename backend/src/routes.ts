@@ -21,7 +21,7 @@ async function routes(fastify: FastifyInstance, options: Object) {
     async (req, res) => {
       const { email, password } = req.body;
 
-      if (email === "test@example.com" && password === "password123") {
+      if (email === "test@example.com" && password === "password1234") {
         return res.code(200).send({
           token: "dummy-token",
           user: {

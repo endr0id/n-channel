@@ -25,6 +25,11 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        LoginRequest: {
+            /** Format: email */
+            email: string;
+            password: string;
+        };
         User: components["schemas"]["UserResponse"];
         ErrorResponse: components["schemas"]["Unauthorized"];
         UserResponse: {
@@ -62,7 +67,7 @@ export interface components {
     requestBodies: {
         LoginRequest: {
             content: {
-                "application/json": components["requestBodies"]["LoginRequest"];
+                "application/json": components["schemas"]["LoginRequest"];
             };
         };
     };

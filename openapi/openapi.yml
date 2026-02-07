@@ -22,6 +22,8 @@ paths:
 
 components:
   schemas:
+    LoginRequest:
+      $ref: "./components/requestBodies/LoginRequest.yml"
     User:
       $ref: "./components/schemas/user/UserResponse.yml"
     ErrorResponse:
@@ -33,7 +35,7 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/requestBodies/LoginRequest"
+            $ref: "#/components/schemas/LoginRequest"
 
   responses:
     LoginSuccess:

@@ -1,0 +1,58 @@
+openapi: 3.1.0
+
+info:
+  title: n-channel API
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3001
+
+paths:
+  /auth/login:
+    post:
+      summary: User login
+      operationId: login
+      requestBody:
+        $ref: "#/components/requestBodies/LoginRequest"
+      responses:
+        "200":
+          $ref: "#/components/responses/LoginSuccess"
+        "401":
+          $ref: "#/components/responses/Unauthorized"
+
+components:
+  schemas:
+    LoginRequest:
+      $ref: "./schemas/requestBodies/LoginRequest.yml"
+    User:
+      $ref: "./schemas/user/UserResponse.yml"
+    ErrorResponse:
+      $ref: "./schemas/errors/Unauthorized.yml"
+
+  requestBodies:
+    LoginRequest:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/LoginRequest"
+
+  responses:
+    LoginSuccess:
+      description: Login successful
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              token:
+                type: string
+              user:
+                $ref: "#/components/schemas/User"
+
+    Unauthorized:
+      description: Invalid credentials
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"

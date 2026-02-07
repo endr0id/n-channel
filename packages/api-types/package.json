@@ -1,0 +1,10 @@
+{
+  "name": "@n-channel/api-types",
+  "private": true,
+  "scripts": {
+    "code-gen": "openapi-typescript ../../openapi/openapi.yml -o ./index.ts"
+  },
+  "devDependencies": {
+    "openapi-typescript": "^7.10.1"
+  }
+}

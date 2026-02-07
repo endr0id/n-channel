@@ -22,7 +22,9 @@ const SignIn = () => {
 		},
 		onSubmit: ({ value }) => {
 			const res = login(value);
-			console.log("value: ", res);
+			res.then((data) => {
+				console.log(data);
+			});
 		},
 	});
 	return (

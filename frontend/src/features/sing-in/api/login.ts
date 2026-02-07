@@ -6,5 +6,5 @@ export async function login(data: { email: string; password: string }) {
 		},
 		body: JSON.stringify(data),
 	});
-	return res.json;
+	return res.json();
 }

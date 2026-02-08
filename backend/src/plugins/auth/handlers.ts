@@ -1,7 +1,6 @@
 import type { FastifyRequest, FastifyReply } from "fastify";
 import type { paths } from '@n-channel/api-types';
 import { login } from './services';
-import { error } from "node:console";
 
 type LoginRequestBody = paths['/auth/login']['post']['requestBody']['content']['application/json'];
 type LoginSuccessResponse = paths['/auth/login']['post']['responses'][200]['content']['application/json'];

@@ -1,7 +1,7 @@
 import Fastify from 'fastify';
 import cors from '@fastify/cors';
 import { env } from './config/env';
-import Routes from './routes';
+import authPlugin from './plugins/auth';
 
 export function buildServer() {
   const fastify = Fastify({
@@ -15,7 +15,7 @@ export function buildServer() {
     credentials: true,
   });
 
-  fastify.register(Routes);
+  fastify.register(authPlugin);
 
   return fastify;
 }

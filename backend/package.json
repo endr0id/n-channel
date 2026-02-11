@@ -14,7 +14,9 @@
     "@fastify/cors": "^11.2.0",
     "dotenv": "^17.2.4",
     "fastify": "^5.7.4",
-    "fastify-plugin": "^5.1.0"
+    "fastify-plugin": "^5.1.0",
+    "fastify-type-provider-zod": "^6.1.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@n-channel/api-types": "workspace:*",

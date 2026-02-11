@@ -1,5 +1,5 @@
 import fp from 'fastify-plugin';
-import { fastify, type FastifyPluginAsync } from 'fastify';
+import type { FastifyPluginAsync } from 'fastify';
 import { authRoutes } from './routes';
 
 const authPlugin: FastifyPluginAsync = async (fastify) => {
@@ -15,4 +15,4 @@ const authPlugin: FastifyPluginAsync = async (fastify) => {
 export default fp(authPlugin, {
   name: 'auth-plugin',
   // dependencies: ['@fastify/jwt'] // 依存プラグインはここに記述
-})
+});

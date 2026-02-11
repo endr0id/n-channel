@@ -1,22 +1,26 @@
-import Fastify from "fastify";
-import cors from "@fastify/cors"
-import Routes from "./routes"
+import { buildServer } from "./server";
+import { env } from "./config/env"
 
-const fastify = Fastify({
-  logger: true,
-});
+const fastify = buildServer();
 
-await fastify.register(cors, {
-  origin: "http://localhost:5173",
-  credentials: true,
-});
-
-fastify.register(Routes);
-
-fastify.listen({ port: 3001, }, function (err, address) {
+fastify.listen({
+  port: env.port,
+  host: env.host,
+}, function (err, address) {
   if (err) {
     fastify.log.error(err)
     process.exit(1)
   }
-  fastify.log.info(address)
-})
+  fastify.log.info(`Server listening on ${address}`);
+});
+
+// NOTE: Graceful Shutdown
+const signals = ['SIGINT', 'SIGTERM'] as const;
+
+for (const signal of signals) {
+  process.on(signal, async () => {
+    fastify.log.info(`Received ${signal}, closing server gracefully`);
+    await fastify.close();
+    process.exit(0);
+  });
+}

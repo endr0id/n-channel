@@ -1,17 +1,22 @@
-name: Frontend Test
+name: Frontend CI
 
-
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - 'n-channel/frontend/**'
+      - 'pnpm-lock.yaml'
+  pull_request:
+    paths:
+      - 'n-channel/frontend/**'
+      - 'pnpm-lock.yaml'
 
 jobs:
-  frontend_test:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
 
@@ -24,5 +29,5 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Run frontend tests
-        run: pnpm test
+        run: pnpm test:run
         working-directory: frontend

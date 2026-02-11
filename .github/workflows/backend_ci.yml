@@ -1,6 +1,14 @@
 name: Backend CI
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - 'n-channel/backend/**'
+      - 'pnpm-lock.yaml'
+  pull_request:
+    paths:
+      - 'n-channel/backend/**'
+      - 'pnpm-lock.yaml'
 
 jobs:
   test:

@@ -1,6 +1,14 @@
 name: Frontend CI
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - 'n-channel/frontend/**'
+      - 'pnpm-lock.yaml'
+  pull_request:
+    paths:
+      - 'n-channel/frontend/**'
+      - 'pnpm-lock.yaml'
 
 jobs:
   test:

@@ -1,6 +1,10 @@
 {
   "name": "n-channel",
   "private": true,
+  "scripts": {
+    "format:frontend": "pnpm exec biome format --write ./frontend/src",
+    "format:backend": "pnpm exec biome format --write ./backend/src"
+  },
   "devDependencies": {
     "@biomejs/biome": "2.3.13"
   }

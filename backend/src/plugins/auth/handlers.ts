@@ -1,10 +1,17 @@
-import { login } from './services';
-import { LoginRequestBody, LoginSuccessResponse, loginFailedResponse, } from './schemas'
-import type { FastifyRequest, FastifyReply, } from "fastify";
+import { login } from "./services";
+import {
+  LoginRequestBody,
+  LoginSuccessResponse,
+  loginFailedResponse,
+} from "./schemas";
+import type { FastifyRequest, FastifyReply } from "fastify";
 
 export async function loginHandler(
-  request: FastifyRequest<{ Body: LoginRequestBody, Reply: LoginSuccessResponse | loginFailedResponse }>,
-  reply: FastifyReply
+  request: FastifyRequest<{
+    Body: LoginRequestBody;
+    Reply: LoginSuccessResponse | loginFailedResponse;
+  }>,
+  reply: FastifyReply,
 ): Promise<void> {
   const { email, password } = request.body;
 
@@ -12,12 +19,12 @@ export async function loginHandler(
 
   if (!result.success) {
     return reply.code(401).send({
-      error: result.error
+      error: result.error,
     });
   }
 
   return reply.code(200).send({
     token: result.token,
-    user: result.user
+    user: result.user,
   });
 }

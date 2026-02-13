@@ -3,9 +3,21 @@
   "private": true,
   "scripts": {
     "format:frontend": "pnpm exec biome format --write ./frontend/src",
-    "format:backend": "pnpm exec biome format --write ./backend/src"
+    "format:backend": "pnpm exec biome format --write ./backend/src",
+    "prepare": "husky"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.3.13"
+    "@biomejs/biome": "2.3.13",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7"
+  },
+  "lint-staged": {
+    "*.{js,ts,cjs,mjs,d.cts,d.mts,jsx,tsx,json,jsonc}": [
+      "biome check --files-ignore-unknown=true",
+      "biome check --write --no-errors-on-unmatched"
+    ],
+    "*": [
+      "biome check --no-errors-on-unmatched --files-ignore-unknown=true"
+    ]
   }
 }

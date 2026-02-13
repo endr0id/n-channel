@@ -1,14 +1,14 @@
-import dotenv from 'dotenv';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+import dotenv from "dotenv";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-dotenv.config({ path: join(__dirname, '../../.env') });
+dotenv.config({ path: join(__dirname, "../../../.env") });
 
-type NodeEnv = 'development' | 'production' | 'test';
-type LogLevel = 'fatal' | 'error' | 'warn' | 'info' | 'debug' | 'trace';
+type NodeEnv = "development" | "production" | "test";
+type LogLevel = "fatal" | "error" | "warn" | "info" | "debug" | "trace";
 
 interface EnvConfig {
   port: number;
@@ -20,27 +20,27 @@ interface EnvConfig {
 
 function assertEnvDefine(key: string): string {
   const value = process.env[key];
-  if (value === undefined || value === '') {
-    throw new Error(`Environment variable ${key} is required but not set`);
+  if (value === undefined || value === "") {
+    throw new Error(`Environment variable is required but not set`);
   }
   return value;
 }
 
 function getEnvConfig(): EnvConfig {
-  const portStr = assertEnvDefine('PORT');
+  const portStr = assertEnvDefine("PORT");
   const port = parseInt(portStr, 10);
-  if (isNaN(port)) {
+  if (Number.isNaN(port)) {
     throw new Error(`PORT must be a number, got: ${portStr}`);
   }
 
-  const nodeEnv = assertEnvDefine('NODE_ENV');
-  const logLevel = assertEnvDefine('LOG_LEVEL');
+  const nodeEnv = assertEnvDefine("NODE_ENV");
+  const logLevel = assertEnvDefine("LOG_LEVEL");
 
   return {
     port,
-    host: assertEnvDefine('HOST'),
+    host: assertEnvDefine("HOST"),
     nodeEnv: nodeEnv as NodeEnv,
-    corsOrigin: assertEnvDefine('CORS_ORIGIN'),
+    corsOrigin: assertEnvDefine("CORS_ORIGIN"),
     logLevel: logLevel as LogLevel,
   };
 }

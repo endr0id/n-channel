@@ -1,3 +1,3 @@
 export interface ChatItemProps {
-	message: string;
+  message: string;
 }

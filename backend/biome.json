@@ -1,0 +1,7 @@
+{
+  "extends": "//",
+  "files": {
+    "includes": ["./src/**/*.{js,ts}", "./src/**/*.test.ts"],
+    "ignoreUnknown": true
+  }
+}

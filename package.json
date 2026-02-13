@@ -1,4 +1,19 @@
 {
   "name": "n-channel",
-  "private": true
+  "private": true,
+  "scripts": {
+    "lint": "biome lint",
+    "format:write": "biome format --write",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.3.13",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.2.7"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx,json}": [
+      "biome check --staged --write --unsafe --no-errors-on-unmatched --files-ignore-unknown=true"
+    ]
+  }
 }

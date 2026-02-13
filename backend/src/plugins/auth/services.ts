@@ -10,14 +10,14 @@ export type LoginResult =
 
 export async function login(
   email: string,
-  password: string
+  password: string,
 ): Promise<LoginResult> {
   const user = await verifyCredentials(email, password);
 
   if (!user) {
     return {
       success: false,
-      error: 'Invalid credentials'
+      error: "Invalid credentials",
     };
   }
 
@@ -26,6 +26,6 @@ export async function login(
   return {
     success: true,
     token,
-    user
-  }
+    user,
+  };
 }

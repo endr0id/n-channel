@@ -17,7 +17,11 @@
     "rules": {
       "recommended": true,
       "style": {
-        "useImportType": "separatedType"
+        "useImportType": {
+          "options": {
+            "style": "separatedType"
+          }
+        }
       }
     }
   },

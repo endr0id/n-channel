@@ -2,8 +2,8 @@
   "name": "n-channel",
   "private": true,
   "scripts": {
-    "format:check": "biome check --files-ignore-unknown=true",
-    "format:write": "pnpm exec biome format --write",
+    "lint": "biome lint",
+    "format:write": "biome format --write",
     "prepare": "husky"
   },
   "devDependencies": {
@@ -13,8 +13,7 @@
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx,json}": [
-      "biome check --staged --files-ignore-unknown=true",
-      "biome check --staged --write --unsafe --no-errors-on-unmatched"
+      "biome check --staged ---write --unsafe --no-errors-on-unmatched -files-ignore-unknown=true"
     ]
   }
 }

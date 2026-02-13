@@ -5,7 +5,7 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-dotenv.config({ path: join(__dirname, "../../.env") });
+dotenv.config({ path: join(__dirname, "../../../.env") });
 
 type NodeEnv = "development" | "production" | "test";
 type LogLevel = "fatal" | "error" | "warn" | "info" | "debug" | "trace";

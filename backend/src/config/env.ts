@@ -1,6 +1,6 @@
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
 import dotenv from "dotenv";
-import { dirname, join } from "path";
-import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -21,7 +21,7 @@ interface EnvConfig {
 function assertEnvDefine(key: string): string {
   const value = process.env[key];
   if (value === undefined || value === "") {
-    throw new Error(`Environment variable ${key} is required but not set`);
+    throw new Error(`Environment variable is required but not set`);
   }
   return value;
 }
@@ -29,7 +29,7 @@ function assertEnvDefine(key: string): string {
 function getEnvConfig(): EnvConfig {
   const portStr = assertEnvDefine("PORT");
   const port = parseInt(portStr, 10);
-  if (isNaN(port)) {
+  if (Number.isNaN(port)) {
     throw new Error(`PORT must be a number, got: ${portStr}`);
   }
 

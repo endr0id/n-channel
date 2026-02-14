@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 describe("env config", () => {
   const originalEnv = process.env;
@@ -12,23 +12,14 @@ describe("env config", () => {
     process.env = originalEnv;
   });
 
-  function setupTestEnv(overrides: Record<string, string> = {}) {
+  function setupTestEnv(_overrides: Record<string, string> = {}) {
     const testEnv = {
-<<<<<<< HEAD
       PORT: "3001",
       HOST: "0.0.0.0",
       NODE_ENV: "development",
       CORS_ORIGIN: "http://localhost:5173",
       LOG_LEVEL: "info",
-=======
-      PORT: '3001',
-      HOST: '0.0.0.0',
-      NODE_ENV: 'development',
-      CORS_ORIGIN: 'http://localhost:5173',
-      LOG_LEVEL: 'info',
-      DATABASE_URL: 'postgresql://local_user:password@localhost:5432/n-channel',
->>>>>>> 8aa3be8 (test: 環境変数のテストケースを追加(#26))
-      ...overrides,
+      DATABASE_URL: "postgresql://local_user:password@localhost:5432/n-channel",
     };
 
     process.env = { ...testEnv };
@@ -40,11 +31,13 @@ describe("env config", () => {
     const { env } = await import(configPath);
 
     expect(env.port).toBe(3001);
-    expect(env.host).toBe('0.0.0.0');
-    expect(env.nodeEnv).toBe('development');
-    expect(env.corsOrigin).toBe('http://localhost:5173');
-    expect(env.logLevel).toBe('info');
-    expect(env.databaseUrl).toBe('postgresql://local_user:password@localhost:5432/n-channel');
+    expect(env.host).toBe("0.0.0.0");
+    expect(env.nodeEnv).toBe("development");
+    expect(env.corsOrigin).toBe("http://localhost:5173");
+    expect(env.logLevel).toBe("info");
+    expect(env.databaseUrl).toBe(
+      "postgresql://local_user:password@localhost:5432/n-channel",
+    );
   });
 
   it("環境変数(PORT)が見つからない場合、throwする", async () => {
@@ -99,11 +92,13 @@ describe("env config", () => {
     );
   });
 
-  it('環境変数(DATABASE_URL)が見つからない場合、throwする', async () => {
-    setupTestEnv({ DATABASE_URL: '' });
+  it("環境変数(DATABASE_URL)が見つからない場合、throwする", async () => {
+    setupTestEnv({ DATABASE_URL: "" });
 
     await expect(async () => {
       await import(configPath);
-    }).rejects.toThrow('Environment variable DATABASE_URL is required but not set');
+    }).rejects.toThrow(
+      "Environment variable DATABASE_URL is required but not set",
+    );
   });
 });

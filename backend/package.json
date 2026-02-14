@@ -1,15 +1,12 @@
 {
   "name": "backend",
-  "version": "0.0.1",
-  "main": "index.js",
-  "type": "module",
+  "private": true,
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "vitest",
-    "test:run": "vitest run",
-    "db:check": "tsx src/scripts/check-db.ts"
+    "test:run": "vitest run"
   },
   "dependencies": {
     "@fastify/cors": "^11.2.0",

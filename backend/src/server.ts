@@ -1,12 +1,13 @@
+import cors from "@fastify/cors";
 import Fastify from "fastify";
 import {
   serializerCompiler,
   validatorCompiler,
   ZodTypeProvider,
 } from "fastify-type-provider-zod";
-import cors from "@fastify/cors";
 import { env } from "./config/env";
 import authPlugin from "./plugins/auth";
+import usersPlugin from "./plugins/users/";
 
 export function buildServer() {
   const fastify = Fastify({
@@ -24,6 +25,7 @@ export function buildServer() {
   });
 
   fastify.register(authPlugin);
+  fastify.register(usersPlugin);
 
   return fastify;
 }

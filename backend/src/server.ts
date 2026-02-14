@@ -6,8 +6,7 @@ import {
   ZodTypeProvider,
 } from "fastify-type-provider-zod";
 import { env } from "./config/env";
-import authPlugin from "./plugins/auth";
-import usersPlugin from "./plugins/users/";
+import plugins from "./plugins";
 
 export function buildServer() {
   const fastify = Fastify({
@@ -23,9 +22,7 @@ export function buildServer() {
     origin: env.corsOrigin,
     credentials: true,
   });
-
-  fastify.register(authPlugin);
-  fastify.register(usersPlugin);
+  fastify.register(plugins);
 
   return fastify;
 }

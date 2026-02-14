@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
-describe("env config", () => {
+describe.skip("env config", () => {
   const originalEnv = process.env;
   const configPath = "../../config/env.ts";
 

@@ -1,4 +1,8 @@
 import type { components } from "@n-channel/api-types";
+import { compare } from "bcrypt";
+import { eq } from "drizzle-orm";
+import { db } from "../../db/";
+import { usersTable } from "../../db/schema/users";
 
 export type User = components["schemas"]["UserResponse"];
 
@@ -12,12 +16,26 @@ export async function verifyCredentials(
   email: string,
   password: string,
 ): Promise<User | null> {
-  // TODO: DB構築したら置き換える
-  if (email === "test@example.com" && password === "password1234") {
-    return { id: 1, name: "test_user" };
-  }
+  const result = await db
+    .select({
+      id: usersTable.id,
+      name: usersTable.name,
+      passwordHash: usersTable.passwordHash,
+    })
+    .from(usersTable)
+    .where(eq(usersTable.email, email))
+    .limit(1);
 
-  return null;
+  const user = result[0];
+  if (!user) return null;
+
+  const isValid = await compare(password, user.passwordHash);
+  if (!isValid) return null;
+
+  return {
+    id: user.id,
+    name: user.name,
+  };
 }
 
 /**
@@ -26,10 +44,14 @@ export async function verifyCredentials(
  *  @returns ユーザー情報 or null
  */
 export async function findUserByEmail(email: string): Promise<User | null> {
-  // TODO: DB構築したら置き換える
-  if (email === "test@example.com") {
-    return { id: 1, name: "test_user" };
-  }
+  const result = await db
+    .select({
+      id: usersTable.id,
+      name: usersTable.name,
+    })
+    .from(usersTable)
+    .where(eq(usersTable.email, email))
+    .limit(1);
 
-  return null;
+  return result[0] ?? null;
 }

@@ -16,6 +16,7 @@ interface EnvConfig {
   nodeEnv: NodeEnv;
   corsOrigin: string;
   logLevel: LogLevel;
+  databaseUrl: string;
 }
 
 function assertEnvDefine(key: string): string {
@@ -42,6 +43,7 @@ function getEnvConfig(): EnvConfig {
     nodeEnv: nodeEnv as NodeEnv,
     corsOrigin: assertEnvDefine("CORS_ORIGIN"),
     logLevel: logLevel as LogLevel,
+    databaseUrl: assertEnvDefine("DATABASE_URL"),
   };
 }
 

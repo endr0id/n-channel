@@ -10,6 +10,7 @@ export default defineConfig({
       NODE_ENV: 'test',
       CORS_ORIGIN: 'http://localhost:5173',
       LOG_LEVEL: 'error', // NOTE: test時はログ抑制
+      DATABASE_URL: 'postgresql://test_user:password@localhost:5432/test'
     },
   },
 });

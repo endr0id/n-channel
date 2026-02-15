@@ -1,58 +1,91 @@
 openapi: 3.1.0
-
 info:
-  title: n-channel API
-  version: 1.0.0
-
+  title: N-Channel API
+  version: 0.0.1
 servers:
   - url: http://localhost:3001
-
-paths:
-  /auth/login:
-    post:
-      summary: User login
-      operationId: login
-      requestBody:
-        $ref: "#/components/requestBodies/LoginRequest"
-      responses:
-        "200":
-          $ref: "#/components/responses/LoginSuccess"
-        "401":
-          $ref: "#/components/responses/Unauthorized"
-
 components:
   schemas:
-    LoginRequest:
-      $ref: "./schemas/requestBodies/LoginRequest.yml"
-    User:
-      $ref: "./schemas/user/UserResponse.yml"
-    ErrorResponse:
-      $ref: "./schemas/errors/Unauthorized.yml"
-
-  requestBodies:
-    LoginRequest:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/LoginRequest"
-
-  responses:
-    LoginSuccess:
-      description: Login successful
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              token:
-                type: string
-              user:
-                $ref: "#/components/schemas/User"
-
-    Unauthorized:
-      description: Invalid credentials
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/ErrorResponse"
+    BadRequestError:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+    ConflictError:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+  parameters: {}
+paths:
+  /users:
+    post:
+      summary: User Register
+      tags:
+        - Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  maxLength: 255
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+                  minLength: 12
+                  maxLength: 255
+                passwordConfirm:
+                  type: string
+              required:
+                - name
+                - email
+                - password
+                - passwordConfirm
+      responses:
+        "201":
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        minimum: -2147483648
+                        maximum: 2147483647
+                      name:
+                        type: string
+                        maxLength: 255
+                      email:
+                        type: string
+                        maxLength: 255
+                    required:
+                      - id
+                      - name
+                      - email
+                required:
+                  - user
+        "400":
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BadRequestError"
+        "409":
+          description: Conflict
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ConflictError"

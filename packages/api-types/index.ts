@@ -4,89 +4,92 @@
  */
 
 export interface paths {
-    "/auth/login": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** User login */
-        post: operations["login"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+  "/users": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-}
-export type webhooks = Record<string, never>;
-export interface components {
-    schemas: {
-        LoginRequest: {
+    get?: never;
+    put?: never;
+    /** User Register */
+    post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          "application/json": {
+            name: string;
             /** Format: email */
             email: string;
             password: string;
+            passwordConfirm: string;
+          };
         };
-        User: components["schemas"]["UserResponse"];
-        ErrorResponse: components["schemas"]["Unauthorized"];
-        UserResponse: {
-            id?: number;
-            name?: string;
+      };
+      responses: {
+        /** @description Created */
+        201: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": {
+              user: {
+                id: number;
+                name: string;
+                email: string;
+              };
+            };
+          };
         };
-        Unauthorized: {
-            error?: string;
+        /** @description Bad Request */
+        400: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["BadRequestError"];
+          };
         };
+        /** @description Conflict */
+        409: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            "application/json": components["schemas"]["ConflictError"];
+          };
+        };
+      };
     };
-    responses: {
-        /** @description Login successful */
-        LoginSuccess: {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": {
-                    token?: string;
-                    user?: components["schemas"]["UserResponse"];
-                };
-            };
-        };
-        /** @description Invalid credentials */
-        Unauthorized: {
-            headers: {
-                [name: string]: unknown;
-            };
-            content: {
-                "application/json": components["schemas"]["Unauthorized"];
-            };
-        };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+}
+export type webhooks = Record<string, never>;
+export interface components {
+  schemas: {
+    BadRequestError: {
+      error: string;
     };
-    parameters: never;
-    requestBodies: {
-        LoginRequest: {
-            content: {
-                "application/json": components["schemas"]["LoginRequest"];
-            };
-        };
+    ConflictError: {
+      error: string;
     };
-    headers: never;
-    pathItems: never;
+  };
+  responses: never;
+  parameters: never;
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
 }
 export type $defs = Record<string, never>;
-export interface operations {
-    login: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: components["requestBodies"]["LoginRequest"];
-        responses: {
-            200: components["responses"]["LoginSuccess"];
-            401: components["responses"]["Unauthorized"];
-        };
-    };
-}
+export type operations = Record<string, never>;

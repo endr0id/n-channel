@@ -1,6 +1,9 @@
+import { extendZodWithOpenApi } from "@asteasolutions/zod-to-openapi";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import * as z from "zod";
 import { usersTable } from "./schema";
+
+extendZodWithOpenApi(z);
 
 const userEntitySchema = createSelectSchema(usersTable);
 

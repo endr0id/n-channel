@@ -1,8 +1,8 @@
 import type { components } from "@n-channel/api-types";
 import { compare } from "bcrypt";
 import { eq } from "drizzle-orm";
-import { db } from "../../db/";
-import { usersTable } from "../../db/schema/users";
+import { db } from "../../infrastructure/db";
+import { usersTable } from "../users/schema";
 
 export type User = components["schemas"]["UserResponse"];
 

@@ -1,7 +1,6 @@
 /// <reference types="vitest/config" />
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
 import { tanstackRouter } from "@tanstack/router-plugin/vite";
 
 export default defineConfig({
@@ -9,7 +8,6 @@ export default defineConfig({
 		// NOTE: '@vitejs/plugin-react' の前に '@tanstack/router-plugin' が渡す
 		tanstackRouter({ target: "react", autoCodeSplitting: true }),
 		react(),
-		tailwindcss(),
 	],
 	test: {
 		globals: true,

@@ -29,3 +29,7 @@ storybook-static
 # tanstack
 .tanstack/
 src/routeTree.gen.ts
+
+## Panda
+styled-system
+styled-system-studio

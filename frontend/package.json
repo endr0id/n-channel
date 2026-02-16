@@ -1,8 +1,6 @@
 {
 	"name": "frontend",
 	"private": true,
-	"version": "0.0.1",
-	"type": "module",
 	"scripts": {
 		"dev": "vite",
 		"build": "tsc -b && vite build",
@@ -11,22 +9,22 @@
 		"storybook": "storybook dev -p 6006",
 		"build-storybook": "storybook build",
 		"test": "vitest",
-		"test:run": "vitest run"
+		"test:run": "vitest run",
+		"prepare": "panda codegen"
 	},
 	"dependencies": {
 		"@headlessui/react": "^2.2.9",
-		"@tailwindcss/vite": "^4.1.18",
 		"@tanstack/react-form": "^1.28.0",
 		"@tanstack/react-router": "^1.158.0",
-		"clsx": "^2.1.1",
+		"radix-ui": "^1.4.3",
 		"react": "^19.2.0",
 		"react-dom": "^19.2.0",
-		"tailwindcss": "^4.1.18",
 		"zod": "^4.3.6"
 	},
 	"devDependencies": {
 		"@eslint/js": "^9.39.1",
 		"@n-channel/api-types": "workspace:*",
+		"@pandacss/dev": "^1.8.2",
 		"@storybook/addon-a11y": "^10.2.3",
 		"@storybook/addon-docs": "^10.2.3",
 		"@storybook/react-vite": "^10.2.3",

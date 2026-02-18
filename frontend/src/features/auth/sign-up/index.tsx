@@ -1,6 +1,6 @@
-import { Form } from "radix-ui";
 import type { JSX } from "react";
 import * as z from "zod";
+import { css } from "../../../../styled-system/css";
 import { useAppForm } from "../../../components/form/hooks/useAppForm";
 import { formRecipes, formWrapperRecipes } from "./sign-up.style";
 
@@ -17,11 +17,19 @@ const signUpSchema = z.object({
   password: z.string().min(12),
 });
 
+const helperTextRecies = css({
+  display: "block",
+  paddingTop: "4px",
+  paddingX: "1rem",
+  fontSize: "0.75rem",
+  color: "mocha.red",
+});
+
 const SignUp = (): JSX.Element => {
   const form = useAppForm({
     defaultValues: defaultValue,
     validators: {
-      onSubmit: signUpSchema,
+      onBlur: signUpSchema,
     },
     onSubmit: ({ value }) => {
       console.log(value);
@@ -30,7 +38,7 @@ const SignUp = (): JSX.Element => {
 
   return (
     <div className={formWrapperRecipes}>
-      <Form.Root
+      <form
         onSubmit={(e) => {
           e.preventDefault();
           form.handleSubmit();
@@ -39,37 +47,57 @@ const SignUp = (): JSX.Element => {
       >
         <form.AppField name="name">
           {(field) => (
-            <field.TextField
-              name={field.name}
-              type="text"
-              placeholder="Name"
-              autoComplete="full-name"
-            />
+            <div>
+              <field.TextField
+                type="text"
+                autoComplete="name"
+                onBlur={(e) => field.handleChange(e.target.value)}
+                isValid={field.state.meta.isValid}
+                placeholder="Name"
+              />
+              {!field.state.meta.isValid && (
+                <span className={helperTextRecies}>Name is required</span>
+              )}
+            </div>
           )}
         </form.AppField>
         <form.AppField name="email">
           {(field) => (
-            <field.TextField
-              name={field.name}
-              type="email"
-              placeholder="Email Address"
-              autoComplete="off"
-            />
+            <div>
+              <field.TextField
+                type="email"
+                autoComplete="email"
+                onBlur={(e) => field.handleChange(e.target.value)}
+                isValid={field.state.meta.isValid}
+                placeholder="Email Address"
+              />
+              {!field.state.meta.isValid && (
+                <span className={helperTextRecies}>
+                  Email Address is required
+                </span>
+              )}
+            </div>
           )}
         </form.AppField>
         <form.AppField name="password">
           {(field) => (
-            <field.TextField
-              name={field.name}
-              type="password"
-              autoComplete="off"
-            />
+            <div>
+              <field.TextField
+                type="password"
+                autoComplete="new-password"
+                onBlur={(e) => field.handleChange(e.target.value)}
+                isValid={field.state.meta.isValid}
+              />
+              {!field.state.meta.isValid && (
+                <span className={helperTextRecies}>Password is required</span>
+              )}
+            </div>
           )}
         </form.AppField>
         <form.AppForm>
-          <form.SubmitButton label="SignUp" />
+          <form.SubmitButton label="Sign Up" />
         </form.AppForm>
-      </Form.Root>
+      </form>
     </div>
   );
 };
